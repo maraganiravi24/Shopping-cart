@@ -1,8 +1,11 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { deleteCart, resetShoppingCart } from "../../store/shoppingSlice";
 
 const Checkout = ({ type }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const handleButton = () => {
     if (type === "checkout") {
       navigate("/order");
@@ -11,6 +14,7 @@ const Checkout = ({ type }) => {
         "Thank you for shopping with us, your order has been successfully placed"
       );
       navigate("/");
+      dispatch(resetShoppingCart());
     }
   };
   return (

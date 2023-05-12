@@ -10,8 +10,8 @@ const Navigation = () => {
   const { cartItemsCount } = useSelector((state) => state.shoppingData);
   return (
     <div>
-      <div className="flex flex-row  justify-between items-center h-16 bg-red-100 px-20">
-        <p className="text-3xl font-bold text-blue-500">E-commerce</p>
+      <div className="flex flex-row  justify-between items-center h-16 bg-red-100 px-5 md:px-20">
+        <p className="text-base md:text-3xl font-bold text-blue-500">E-commerce</p>
         <div className="flex flex-row items-center gap-x-10">
           <Link to="/">
             <img src={homeIcon} alt="Home" />

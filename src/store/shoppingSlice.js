@@ -67,6 +67,10 @@ const shoppingSlice = createSlice({
         return product.name.toLowerCase().includes(payload.toLowerCase());
       });
     },
+    resetShoppingCart (state ){
+      state.cartList=[]
+      state.cartItemsCount=0
+    }
   },
 });
 export const {
@@ -77,5 +81,6 @@ export const {
   deleteCart,
   setSearchText,
   filterProductsList,
+  resetShoppingCart
 } = shoppingSlice.actions;
 export default shoppingSlice.reducer;

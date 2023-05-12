@@ -55,7 +55,7 @@ const ShoppingCart = () => {
           const { id, name, price, quantity, imageUrl } = item;
           return (
             <div
-              className="shadow-lg w-5/12 rounded-lg flex flex-row justify-center items-center gap-x-10 h-60 overflow-hidden"
+              className="shadow-lg w-full  lg:w-5/12   rounded-lg flex flex-row justify-center items-center gap-x-10 h-60 overflow-hidden"
               key={id}
             >
               <img className="w-44" src={imageUrl} alt={`${imageUrl}`}></img>
