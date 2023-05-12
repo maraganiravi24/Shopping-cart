@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { deleteCart, resetShoppingCart } from "../../store/shoppingSlice";
+import {resetShoppingCart } from "../../store/shoppingSlice";
 
 const Checkout = ({ type }) => {
   const navigate = useNavigate();
