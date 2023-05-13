@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { productsInfo } from "../utils/dummyData";
+import { countCartItem } from "../helper functions/helpers";
 const initialState = {
   cartList: [],
   productsList: [],
@@ -31,46 +32,53 @@ const shoppingSlice = createSlice({
         updatedCartList = [...state.cartList, { ...payload, quantity: 1 }];
       }
       state.cartList = updatedCartList;
-      const cartCount = updatedCartList.reduce((acc, val) => {
-        return acc + val.quantity;
-      }, 0);
-      state.cartItemsCount = cartCount;
+      // const cartCount = updatedCartList.reduce((acc, val) => {
+      //   return acc + val.quantity;
+      // }, 0);
+      state.cartItemsCount = countCartItem(updatedCartList);
     },
     increaseCount(state, { payload }) {
-      state.cartList = state.cartList.map((product) => {
+      const newCartList = state.cartList.map((product) => {
         const { id } = product;
         if (payload === id) {
           return { ...product, quantity: product.quantity + 1 };
         }
         return { ...product };
       });
+      state.cartList = newCartList;
+      state.cartItemsCount = countCartItem(newCartList);
     },
     decreaseCount(state, { payload }) {
-      state.cartList = state.cartList.map((product) => {
+      const newCartList = state.cartList.map((product) => {
         const { id } = product;
         if (payload === id) {
           return { ...product, quantity: product.quantity - 1 };
         }
         return { ...product };
       });
+      state.cartList = newCartList;
+      state.cartItemsCount = countCartItem(newCartList);
     },
     deleteItem(state, { payload }) {
-      state.cartList = state.cartList.filter(
+      const newCartList = state.cartList.filter(
         (product) => product.id !== payload
       );
+      state.cartList = newCartList;
+      state.cartItemsCount = countCartItem(newCartList);
     },
     deleteCart(state) {
       state.cartList = [];
+      state.cartItemsCount = 0;
     },
     filterProductsList(state, { payload }) {
       state.productsList = productsInfo.filter((product) => {
         return product.name.toLowerCase().includes(payload.toLowerCase());
       });
     },
-    resetShoppingCart (state ){
-      state.cartList=[]
-      state.cartItemsCount=0
-    }
+    resetShoppingCart(state) {
+      state.cartList = [];
+      state.cartItemsCount = 0;
+    },
   },
 });
 export const {
@@ -81,6 +89,6 @@ export const {
   deleteCart,
   setSearchText,
   filterProductsList,
-  resetShoppingCart
+  resetShoppingCart,
 } = shoppingSlice.actions;
 export default shoppingSlice.reducer;
